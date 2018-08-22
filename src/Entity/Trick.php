@@ -26,7 +26,7 @@ class Trick
     /**
      * @ORM\Column(type="text")
      */
-    private $descripion;
+    private $description;
 
     /**
      * @ORM\Column(type="datetime")
@@ -60,6 +60,7 @@ class Trick
 
     public function __construct()
     {
+        $this->created = new \DateTime();
         $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->videos = new ArrayCollection();
@@ -82,14 +83,14 @@ class Trick
         return $this;
     }
 
-    public function getDescripion(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descripion;
+        return $this->description;
     }
 
-    public function setDescripion(string $descripion): self
+    public function setDescription(string $description): self
     {
-        $this->descripion = $descripion;
+        $this->description = $description;
 
         return $this;
     }
@@ -160,6 +161,15 @@ class Trick
 
         return $this;
     }
+
+    /**
+     * @param Category $category
+     */
+    public function addCategory(Category $category)
+    {
+        $this->category[] = $category;
+    }
+
 
     /**
      * @return Collection|Comment[]
