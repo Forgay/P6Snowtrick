@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
-class Video
+class Image
 {
     /**
      * @ORM\Id()
@@ -24,15 +24,10 @@ class Video
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private $extension;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $alt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="videos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      */
     private $trick;
 
@@ -53,26 +48,14 @@ class Video
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getExtension(): ?string
     {
-        return $this->url;
+        return $this->extension;
     }
 
-    public function setUrl(string $url): self
+    public function setExtension(string $extension): self
     {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    public function getAlt(): ?string
-    {
-        return $this->alt;
-    }
-
-    public function setAlt(?string $alt): self
-    {
-        $this->alt = $alt;
+        $this->extension = $extension;
 
         return $this;
     }
