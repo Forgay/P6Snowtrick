@@ -41,7 +41,7 @@
                             <div class="trick-item">
                                 <div class="trick-image">
                                     <div class="embed-responsive embed-responsive-16by9">
-                                        <a class="embed-responsive-item" href="">
+                                        <a class="embed-responsive-item" href="{{ path('trick_show', {'id': trick.id}) }}">
                                             <img src="{{ asset(trick.trickImage) }}">
                                         </a>
                                     </div>
@@ -60,7 +60,7 @@
                                                 </a>
                                             </li>
                                             <li class="action delete">
-
+                                                <i class="fas fa-delete"></i>
                                             </li>
                                         {% endif %}
                                     </ul>

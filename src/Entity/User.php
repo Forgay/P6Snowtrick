@@ -64,6 +64,11 @@ class User implements UserInterface, \Serializable
      */
     private $plainPassword;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", cascade={"persist", "remove"})
+     */
+    private $avatar;
+
 
     public function __construct()
     {
@@ -231,6 +236,30 @@ class User implements UserInterface, \Serializable
             $this->password,
 
             ) = unserialize($serialized);
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?Avatar $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getAvatarPath(): ?string
+    {
+        $path = '/images/avatar.jpg';
+
+        if(!is_null($this->avatar))
+            $path = $this->avatar->getPath();
+
+        return $path;
     }
 
 }

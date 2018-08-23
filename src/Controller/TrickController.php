@@ -7,6 +7,7 @@ use App\Entity\Trick;
 use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TrickController extends Controller
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * HomeController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/", name="home", methods="GET")
      */
@@ -51,7 +66,7 @@ class TrickController extends Controller
     }
 
     /**
-     * @Route("/trick/show/{id}", name="trick_show", methods="GET")
+     * @Route("/trick/show/{id}", name="trick_show", methods="GET|POST")
      */
     public function show(Trick $trick,Request $request): Response
     {
@@ -60,6 +75,19 @@ class TrickController extends Controller
         ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $this->entityManager->persist($comment);
+
+            $comment->setUser($this->getUser());
+            $comment->setTrick($trick);
+
+
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Votre commentaire est ajouté !');
+
+            return $this->redirectToRoute('trick_show', [
+                'id' =>$trick->getId()
+            ]);
 
         }
         return $this->render('trick/show.html.twig', [
