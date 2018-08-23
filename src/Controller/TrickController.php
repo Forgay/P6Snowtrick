@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/trick")
+ *
  */
 class TrickController extends Controller
 {
@@ -20,7 +20,9 @@ class TrickController extends Controller
      */
     public function index(TrickRepository $trickRepository): Response
     {
-        return $this->render('trick/index.html.twig', ['tricks' => $trickRepository->findAll()]);
+        return $this->render('trick/index.html.twig', [
+            'tricks' => $trickRepository->findAll()
+        ]);
     }
 
     /**

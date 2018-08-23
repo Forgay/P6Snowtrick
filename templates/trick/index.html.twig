@@ -1,41 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trick index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/js/app.js') }}"></script>
+{% endblock %}
+
+{% block modals %}
+
+{% endblock %}
 
 {% block body %}
-    <h1>Trick index</h1>
+    <section id="cover" class="cover">
+        <div class="cover-inner">
+            <div class="cover-catch">
+            <b>Bienvenue sur SnowTricks,</b><br>
+            <b>Le site des amateurs de snowboard.</b><br>
+            <b>Des informations sur les tricks, Des figures.. </b><br>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for trick in tricks %}
-            <tr>
-                <td>{{ trick.id }}</td>
-                <td>{{ trick.name }}</td>
-                <td>{{ trick.description }}</td>
-                <td>{{ trick.created ? trick.created|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ trick.updated ? trick.updated|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('trick_show', {'id': trick.id}) }}">show</a>
-                    <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        </div>
+        <div class="cover-goto">
+            <a href="#trick_list">
+                <i class="fas fa-arrow-alt-circle-down"></i>
+            </a>
+        </div>
+        </div>
+    </section>
 
-    <a href="{{ path('trick_new') }}">Create new</a>
+    <section id="trick_list">
+        <div class="container-fluid">
+            <div class="trick-list">
+                <div class="row">
+                    {% for trick in tricks %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12 {% if loop.index >= 5 %}hidden-trick{% endif %}">
+                            <div class="trick-item">
+                                <div class="trick-image">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <a class="embed-responsive-item" href="">
+                                            <img src="{{ asset(trick.trickImage) }}">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="trick-name">
+                                    <ul class="flex-row">
+                                        <li class="name">
+                                            <a href="">
+                                                {{ trick.name }}
+                                            </a>
+                                        </li>
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                            <li class="action edit">
+                                                <a href="">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </li>
+                                            <li class="action delete">
+
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="text-center">
+                </div>
+
+                {% if tricks|length > 5 %}
+                    <div class="text-center">
+                        <button class="btn btn-info mr-3"
+                                onclick="this.remove(); $('.hidden-trick').show(); $('.trick-goto a').show();">Voir plus
+                        </button>
+                        <a href="" class="btn btn-dark">Ajouter un trick</a>
+                    </div>
+                    <div class="trick-goto text-right">
+                        <a href="#top">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

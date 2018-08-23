@@ -232,4 +232,19 @@ class Trick
 
         return $this;
     }
+    /**
+     * @return string
+     */
+    public function getTrickImage(): string
+    {
+        $path = '/images/jumb.jpg';
+
+        if(!$this->images->isEmpty()) {
+            $image = $this->images->first();
+            $path = $image->getPath();
+        }
+
+        return $path;
+    }
+
 }

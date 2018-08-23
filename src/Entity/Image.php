@@ -71,4 +71,20 @@ class Image
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getDir()
+    {
+        return 'images/';
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->getDir().$this->getName().'.'.$this->getExtension();
+    }
 }
