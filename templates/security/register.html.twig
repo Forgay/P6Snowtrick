@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section id="cover" class="cover">
+        <div class="cover-inner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-7">
+                        <div class="register py-3">
+                            <h3>Créer un compte</h3>
+                            <div class="register-inner">
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                <button type="submit" class="btn btn-dark">Inscription</button>
+                                {{ form_end(form) }}
+                            </div>
+                            <p><a href="{{ path('login') }}" class="btn btn-light">Déjà un compte ?</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

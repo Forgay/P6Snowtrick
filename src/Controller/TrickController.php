@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Trick;
+use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends Controller
 {
     /**
-     * @Route("/", name="trick_index", methods="GET")
+     * @Route("/", name="home", methods="GET")
      */
     public function index(TrickRepository $trickRepository): Response
     {
@@ -49,11 +51,21 @@ class TrickController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="trick_show", methods="GET")
+     * @Route("/trick/show/{id}", name="trick_show", methods="GET")
      */
-    public function show(Trick $trick): Response
+    public function show(Trick $trick,Request $request): Response
     {
-        return $this->render('trick/show.html.twig', ['trick' => $trick]);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment)
+        ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+        }
+        return $this->render('trick/show.html.twig', [
+            'form' => $form->createView(),
+            'trick' => $trick
+        ]);
     }
 
     /**

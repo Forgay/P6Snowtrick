@@ -933,31 +933,31 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="237" parent="7" name="avatar">
+    <table id="237" parent="7" name="app_users">
       <Engine>InnoDB</Engine>
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="238" parent="7" name="category">
+    <table id="238" parent="7" name="avatar">
       <Engine>InnoDB</Engine>
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="239" parent="7" name="comment">
+    <table id="239" parent="7" name="category">
       <Engine>InnoDB</Engine>
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="240" parent="7" name="image">
+    <table id="240" parent="7" name="comment">
       <Engine>InnoDB</Engine>
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="241" parent="7" name="migration_versions">
+    <table id="241" parent="7" name="image">
+      <Engine>InnoDB</Engine>
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="242" parent="7" name="migration_versions">
       <Engine>InnoDB</Engine>
       <Collation>utf8_unicode_ci</Collation>
     </table>
-    <table id="242" parent="7" name="trick">
-      <Engine>InnoDB</Engine>
-      <Collation>utf8mb4_unicode_ci</Collation>
-    </table>
-    <table id="243" parent="7" name="user">
+    <table id="243" parent="7" name="trick">
       <Engine>InnoDB</Engine>
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
@@ -972,259 +972,273 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="237" name="name">
-      <Position>2</Position>
-      <DataType>varchar(25)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="247" parent="237" name="extension">
-      <Position>3</Position>
-      <DataType>varchar(60)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="248" parent="237" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="249" parent="238" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="250" parent="238" name="name">
-      <Position>2</Position>
-      <DataType>varchar(25)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="251" parent="238" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="252" parent="239" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="253" parent="239" name="content">
-      <Position>2</Position>
-      <DataType>longtext|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="254" parent="239" name="trick_id">
-      <Position>3</Position>
-      <DataType>int(11)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="255" parent="239" name="IDX_9474526CB281BE2E">
-      <ColNames>trick_id</ColNames>
-    </index>
-    <key id="256" parent="239" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="257" parent="239" name="FK_9474526CB281BE2E">
-      <ColNames>trick_id</ColNames>
-      <RefSchemaName>p6_snow</RefSchemaName>
-      <RefTableName>trick</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="258" parent="240" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="259" parent="240" name="name">
+    <column id="246" parent="237" name="username">
       <Position>2</Position>
       <DataType>varchar(60)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="240" name="extension">
-      <Position>3</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="261" parent="240" name="trick_id">
-      <Position>4</Position>
-      <DataType>int(11)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="262" parent="240" name="IDX_C53D045FB281BE2E">
-      <ColNames>trick_id</ColNames>
-    </index>
-    <key id="263" parent="240" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="264" parent="240" name="FK_C53D045FB281BE2E">
-      <ColNames>trick_id</ColNames>
-      <RefSchemaName>p6_snow</RefSchemaName>
-      <RefTableName>trick</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="265" parent="241" name="version">
-      <Position>1</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="266" parent="241" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>version</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="267" parent="242" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="268" parent="242" name="name">
-      <Position>2</Position>
-      <DataType>varchar(25)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="269" parent="242" name="description">
-      <Position>3</Position>
-      <DataType>longtext|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="270" parent="242" name="created">
-      <Position>4</Position>
-      <DataType>datetime|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="271" parent="242" name="updated">
-      <Position>5</Position>
-      <DataType>datetime|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="272" parent="242" name="category_id">
-      <Position>6</Position>
-      <DataType>int(11)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="273" parent="242" name="IDX_D8F0A91E12469DE2">
-      <ColNames>category_id</ColNames>
-    </index>
-    <key id="274" parent="242" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="275" parent="242" name="FK_D8F0A91E12469DE2">
-      <ColNames>category_id</ColNames>
-      <RefSchemaName>p6_snow</RefSchemaName>
-      <RefTableName>category</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="276" parent="243" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="277" parent="243" name="username">
-      <Position>2</Position>
-      <DataType>varchar(60)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="278" parent="243" name="password">
+    <column id="247" parent="237" name="password">
       <Position>3</Position>
       <DataType>varchar(60)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="243" name="email">
+    <column id="248" parent="237" name="email">
       <Position>4</Position>
       <DataType>varchar(60)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="280" parent="243" name="is_active">
+    <column id="249" parent="237" name="is_active">
       <Position>5</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="243" name="roles">
+    <column id="250" parent="237" name="roles">
       <Position>6</Position>
       <Comment>(DC2Type:json_array)</Comment>
       <DataType>json|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="243" name="confirm_token">
+    <column id="251" parent="237" name="confirm_token">
       <Position>7</Position>
       <DataType>varchar(64)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="243" name="reset_token">
+    <column id="252" parent="237" name="reset_token">
       <Position>8</Position>
       <DataType>varchar(64)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="284" parent="243" name="PRIMARY">
+    <key id="253" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="285" parent="244" name="id">
+    <column id="254" parent="238" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="244" name="name">
+    <column id="255" parent="238" name="name">
+      <Position>2</Position>
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="256" parent="238" name="extension">
+      <Position>3</Position>
+      <DataType>varchar(60)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="257" parent="238" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="258" parent="239" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="259" parent="239" name="name">
+      <Position>2</Position>
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="260" parent="239" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="261" parent="240" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="262" parent="240" name="content">
+      <Position>2</Position>
+      <DataType>longtext|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="263" parent="240" name="trick_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="264" parent="240" name="user_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="265" parent="240" name="IDX_9474526CB281BE2E">
+      <ColNames>trick_id</ColNames>
+    </index>
+    <index id="266" parent="240" name="IDX_9474526CA76ED395">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="267" parent="240" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="268" parent="240" name="FK_9474526CB281BE2E">
+      <ColNames>trick_id</ColNames>
+      <RefSchemaName>p6_snow</RefSchemaName>
+      <RefTableName>trick</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="269" parent="240" name="FK_9474526CA76ED395">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>p6_snow</RefSchemaName>
+      <RefTableName>app_users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="270" parent="241" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="271" parent="241" name="name">
       <Position>2</Position>
       <DataType>varchar(60)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="244" name="url">
+    <column id="272" parent="241" name="extension">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="244" name="alt">
+    <column id="273" parent="241" name="trick_id">
       <Position>4</Position>
-      <DataType>varchar(255)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="289" parent="244" name="trick_id">
-      <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="290" parent="244" name="IDX_7CC7DA2CB281BE2E">
+    <index id="274" parent="241" name="IDX_C53D045FB281BE2E">
       <ColNames>trick_id</ColNames>
     </index>
-    <key id="291" parent="244" name="PRIMARY">
+    <key id="275" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="292" parent="244" name="FK_7CC7DA2CB281BE2E">
+    <foreign-key id="276" parent="241" name="FK_C53D045FB281BE2E">
+      <ColNames>trick_id</ColNames>
+      <RefSchemaName>p6_snow</RefSchemaName>
+      <RefTableName>trick</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="277" parent="242" name="version">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="278" parent="242" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="279" parent="243" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="280" parent="243" name="name">
+      <Position>2</Position>
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="281" parent="243" name="description">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="282" parent="243" name="created">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="283" parent="243" name="updated">
+      <Position>5</Position>
+      <DataType>datetime|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="284" parent="243" name="category_id">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="285" parent="243" name="IDX_D8F0A91E12469DE2">
+      <ColNames>category_id</ColNames>
+    </index>
+    <key id="286" parent="243" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="287" parent="243" name="FK_D8F0A91E12469DE2">
+      <ColNames>category_id</ColNames>
+      <RefSchemaName>p6_snow</RefSchemaName>
+      <RefTableName>category</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="288" parent="244" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="289" parent="244" name="name">
+      <Position>2</Position>
+      <DataType>varchar(60)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="290" parent="244" name="url">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="291" parent="244" name="alt">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="292" parent="244" name="trick_id">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="293" parent="244" name="IDX_7CC7DA2CB281BE2E">
+      <ColNames>trick_id</ColNames>
+    </index>
+    <key id="294" parent="244" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="295" parent="244" name="FK_7CC7DA2CB281BE2E">
       <ColNames>trick_id</ColNames>
       <RefSchemaName>p6_snow</RefSchemaName>
       <RefTableName>trick</RefTableName>
