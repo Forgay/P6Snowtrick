@@ -1,13 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}Edit Trick{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/css/trick.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/trick-edit.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="{{ asset('/js/trick-edit.js') }}"></script>
+{% endblock %}
+
+{% block modals %}
+    {{ parent() }}
+    {{ include('form/_delete_trick_confirmation.html.twig') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Trick</h1>
+    <section id="cover" class="cover d-none d-sm-block">
+    </section>
 
-    {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
+    <section class="trick-content mb-3 mb-sm-5 pt-3 pt-sm-5">
+        <div class="container">
+            <div class="trick pb-4 px-2">
+                {{ include('form/_edit_trick_form.html.twig') }}
+            </div>
+        </div>
+    </section>
 
-    <a href="{{ path('trick_index') }}">back to list</a>
-
-    {{ include('trick/_delete_form.html.twig') }}
 {% endblock %}

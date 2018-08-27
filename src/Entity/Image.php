@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use App\Service\FileUploader;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @ORM\EntityListeners({"App\EventListener\ImageUploadListener"})
  */
 class Image
 {
@@ -30,6 +33,17 @@ class Image
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
      */
     private $trick;
+    /**
+     * @var UploadedFile
+     */
+    private $file;
+
+    /**
+     * @var string
+     */
+    private $tempFilename;
+
+
 
     public function getId(): ?int
     {
@@ -41,7 +55,7 @@ class Image
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -53,7 +67,7 @@ class Image
         return $this->extension;
     }
 
-    public function setExtension(string $extension): self
+    public function setExtension(string $extension)
     {
         $this->extension = $extension;
 
@@ -73,9 +87,46 @@ class Image
     }
 
     /**
+     */
+    public function setTempFilename()
+    {
+        $this->tempFilename = $this->name.'.'.$this->extension;
+    }
+
+    /**
      * @return string
      */
-    public function getDir()
+    public function getTempFilename(): ?string
+    {
+        return $this->tempFilename;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFile(): ?UploadedFile
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param UploadedFile|null $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+
+        if ($this->extension !== null) {
+            $this->setTempFilename();
+
+            $this->url = null;
+            $this->alt = null;
+        }
+    }
+    /**
+     * @return string
+     */
+    public function getDirectory()
     {
         return 'images/';
     }
@@ -85,6 +136,6 @@ class Image
      */
     public function getPath()
     {
-        return $this->getDir().$this->getName().'.'.$this->getExtension();
+        return $this->getDirectory().$this->getName().'.'.$this->getExtension();
     }
 }

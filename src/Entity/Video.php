@@ -19,11 +19,7 @@ class Video
     /**
      * @ORM\Column(type="string", length=60)
      */
-    private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $url;
 
     /**
@@ -41,17 +37,6 @@ class Video
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getUrl(): ?string
     {
@@ -87,5 +72,18 @@ class Video
         $this->trick = $trick;
 
         return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getIframe(): ?string
+    {
+        if($this->alt == 'youtube') {
+            $url = 'https://www.youtube.com/embed/'.$this->url;
+        } else {
+            $url = 'https://www.dailymotion.com/embed/video/'.$this->url;
+        }
+
+        return $url;
     }
 }

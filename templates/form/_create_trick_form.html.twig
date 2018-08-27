@@ -1,4 +1,4 @@
-{{ form_start(form, {action: path('trick_create')}) }}
+{{ form_start(form, {action: path('trick_new')}) }}
 
 <div class="d-block d-sm-none text-center">
     <button class="btn btn-info mt-4" onclick="this.remove(); $('.trick-media').removeClass('d-none');">Voir les médias</button>
@@ -51,7 +51,7 @@
     {{ form_errors(form) }}
 
     {{ form_row(form.name) }}
-    {{ form_row(form.slug) }}
+
     {{ form_row(form.description, {attr: {rows: 5}}) }}
 
     <div class="row">

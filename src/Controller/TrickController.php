@@ -52,11 +52,11 @@ class TrickController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($trick);
-            $em->flush();
 
-            return $this->redirectToRoute('trick_index');
+            $this->entityManager->persist($trick);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('trick/new.html.twig', [
@@ -68,13 +68,13 @@ class TrickController extends Controller
     /**
      * @Route("/trick/show/{id}", name="trick_show", methods="GET|POST")
      */
-    public function show(Trick $trick,Request $request): Response
+    public function show(Trick $trick, Request $request): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment)
-        ->handleRequest($request);
+            ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($comment);
 
             $comment->setUser($this->getUser());
@@ -86,7 +86,7 @@ class TrickController extends Controller
             $this->addFlash('success', 'Votre commentaire est ajouté !');
 
             return $this->redirectToRoute('trick_show', [
-                'id' =>$trick->getId()
+                'id' => $trick->getId()
             ]);
 
         }
@@ -97,15 +97,17 @@ class TrickController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="trick_edit", methods="GET|POST")
+     * @Route("trick/edit/{id}", name="trick_edit", methods="GET|POST")
      */
     public function edit(Request $request, Trick $trick): Response
     {
+
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('trick_edit', ['id' => $trick->getId()]);
         }
@@ -117,16 +119,18 @@ class TrickController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="trick_delete", methods="DELETE")
+     * @Route("delete/{id}", name="trick_delete", methods="DELETE")
      */
     public function delete(Request $request, Trick $trick): Response
     {
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($trick);
-            $em->flush();
-        }
 
-        return $this->redirectToRoute('trick_index');
+            $this->entityManager->remove($trick);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', "la figure est supprimée.");
+
+            return $this->redirectToRoute('home');
+        }
     }
 }

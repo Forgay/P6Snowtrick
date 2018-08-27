@@ -5,6 +5,10 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    upload_directory: '%kernel.project_dir%/public/'
+    images_directory: '%kernel.project_dir%/public/images'
+    avatars_directory: '%kernel.project_dir%/public/avatars'
+
 
 services:
     # default configuration for services in *this* file
@@ -23,9 +27,26 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
+
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\EventListener\AvatarUploadListener:
+            arguments:
+                $directory: '%avatars_directory%'
+            tags:
+                - { name: doctrine.orm.entity_listener }
+
+    App\EventListener\ImageUploadListener:
+        arguments:
+            $directory: '%images_directory%'
+        tags:
+            - { name: doctrine.orm.entity_listener }
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%upload_directory%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -24,9 +24,11 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Trick", mappedBy="categories")
      */
     private $tricks;
+
+
 
     public function __construct()
     {
@@ -62,7 +64,7 @@ class Category
     {
         if (!$this->tricks->contains($trick)) {
             $this->tricks[] = $trick;
-            $trick->setCategory($this);
+            $trick->addCategory($this);
         }
 
         return $this;
@@ -72,12 +74,10 @@ class Category
     {
         if ($this->tricks->contains($trick)) {
             $this->tricks->removeElement($trick);
-            // set the owning side to null (unless already changed)
-            if ($trick->getCategory() === $this) {
-                $trick->setCategory(null);
-            }
+            $trick->removeCategory($this);
         }
 
         return $this;
     }
+
 }

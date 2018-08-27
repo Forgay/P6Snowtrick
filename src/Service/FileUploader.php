@@ -39,4 +39,31 @@ class FileUploader
     {
         return $this->targetDirectory;
     }
+
+    /**
+     * @param string $directory
+     */
+    public function setTargetDirectory($directory)
+    {
+        $this->targetDirectory = $directory;
+    }
+    /**
+     * @param UploadedFile $file
+     *
+     * @return string
+     */
+    public function getExtension(UploadedFile $file): string
+    {
+        return $file->guessExtension();
+    }
+
+    /**
+     * @param UploadedFile $file
+     *
+     * @return string
+     */
+    public function getOriginalName(UploadedFile $file): string
+    {
+        return $file->getClientOriginalName();
+    }
 }

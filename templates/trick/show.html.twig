@@ -32,7 +32,7 @@
                             </a>
                         </div>
                         <div class="action-delete text-center">
-                            {{ include('Form/_delete_trick_form.html.twig', {trick: trick}) }}
+                            {{ include('form/_delete_trick_form.html.twig', {trick: trick}) }}
                         </div>
                     </div>
                 {% endif %}
@@ -86,12 +86,10 @@
                             </li>
                         {% endif %}
                         <li class="mx-2">
-                            {% if trick.category is not null %}
                                 Catégories :
-                                {% for category in trick.category %}
-                                    {{ category.name }}{% if not loop.last %}, {% endif %}
+                                {% for category in trick.categories %}
+                                    {{ category.name }}
                                 {% endfor %}
-                            {% endif %}
                         </li>
                     </ul>
                 </div>

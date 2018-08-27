@@ -39,24 +39,24 @@ class Trick
     private $updated;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image",cascade={"persist", "remove", "refresh"}, mappedBy="trick")
      */
     private $images;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
-     */
-    private $category;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment",cascade={"persist", "remove", "refresh"}, mappedBy="trick")
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Video",cascade={"persist", "remove", "refresh"}, mappedBy="trick")
      */
     private $videos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="tricks")
+     */
+    private $categories;
 
     public function __construct()
     {
@@ -64,6 +64,8 @@ class Trick
         $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->videos = new ArrayCollection();
+        $this->category = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,27 +152,29 @@ class Trick
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     /**
      * @param Category $category
      */
     public function addCategory(Category $category)
     {
-        $this->category[] = $category;
+        $this->categories[] = $category;
     }
 
+    /**
+     * @param Category $category
+     */
+    public function removeCategory(Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
 
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): ?Collection
+    {
+        return $this->categories;
+    }
     /**
      * @return Collection|Comment[]
      */
