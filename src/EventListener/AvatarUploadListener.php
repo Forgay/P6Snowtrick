@@ -5,7 +5,6 @@ namespace App\EventListener;
 use App\Entity\Avatar;
 use App\Service\FileUploader;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
 
 class AvatarUploadListener

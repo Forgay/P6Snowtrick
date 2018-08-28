@@ -50,7 +50,7 @@ class UserController extends Controller
 
             $this->addFlash('success', 'Votre profil est MàJ!');
 
-            return $this->redirectToRoute('user_profile');
+            return $this->redirectToRoute('profile');
         }
 
         return $this->render('user/profile.html.twig', array(

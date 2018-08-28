@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AvatarRepository")
+ * @ORM\EntityListeners({"App\EventListener\AvatarUploadListener"})
  */
 class Avatar
 {
@@ -18,7 +19,7 @@ class Avatar
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
@@ -26,8 +27,15 @@ class Avatar
      * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $extension;
+    /**
+     * @var UploadedFile
+     */
+    private $file;
 
-
+    /**
+     * @var string
+     */
+    private $tempFilename;
 
     public function getId(): ?int
     {
@@ -39,11 +47,14 @@ class Avatar
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param string $name
+     *
+     */
+    public function setName(string $name)
     {
         $this->name = $name;
 
-        return $this;
     }
 
     public function getExtension(): ?string
@@ -51,12 +62,12 @@ class Avatar
         return $this->extension;
     }
 
-    public function setExtension(?string $extension): self
+    public function setExtension($extension)
     {
         $this->extension = $extension;
 
-        return $this;
     }
+
     /**
      * @return UploadedFile
      */
@@ -84,7 +95,7 @@ class Avatar
      */
     public function setTempFilename()
     {
-        $this->tempFilename = $this->name.'.'.$this->extension;
+        $this->tempFilename = $this->name. '.' .$this->extension;
     }
 
     /**

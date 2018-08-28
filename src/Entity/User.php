@@ -51,7 +51,7 @@ class User implements UserInterface, \Serializable
     private $confirmToken;
 
     /**
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $resetToken;
 
@@ -65,7 +65,7 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", cascade={"persist", "remove","refresh"})
      */
     private $avatar;
 
@@ -74,6 +74,7 @@ class User implements UserInterface, \Serializable
     {
         $this->isActive = true;
         $this->comments = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -238,12 +239,19 @@ class User implements UserInterface, \Serializable
             ) = unserialize($serialized);
     }
 
+    /**
+     * @return Avatar
+     */
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
     }
 
-    public function setAvatar(?Avatar $avatar): self
+    /**
+     * @param Avatar $avatar
+     * @return $this
+     */
+    public function setAvatar(Avatar $avatar)
     {
         $this->avatar = $avatar;
 
